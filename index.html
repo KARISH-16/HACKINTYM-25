@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Emergency & Ambulance System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+        
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #map,
+        #donor-list,
+        #pharmacy-list,
+        #hospital-list,
+        #routing-status {
+            width: 100%;
+            height: 300px;
+            background-color: #ddd;
+        }
+        
+        button {
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #2e7d32;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Medical Emergency & Ambulance System</h1>
+    </header>
+
+    <section id="problem-statement">
+        <h2>Problem Statement</h2>
+        <p>Ambulance services within [Specify Region/City/System] face significant challenges in achieving optimal emergency response times and seamless healthcare integration. These challenges manifest as:</p>
+        <ul>
+            <li>Suboptimal Routing and Navigation</li>
+            <li>High coordination with all life-line services and organizations</li>
+        </ul>
+    </section>
+
+    <section id="locator">
+        <h2>Smart Medical Service Locator</h2>
+        <input type="text" id="search" placeholder="Enter your location">
+        <button onclick="findHospitals()">Find Hospitals</button>
+        <div id="map"></div>
+    </section>
+
+    <section id="donor">
+        <h2>Blood & Organ Donor Availability</h2>
+        <button onclick="findDonors()">Find Donors</button>
+        <div id="donor-list"></div>
+    </section>
+
+    <section id="pharmacy">
+        <h2>Nearby Pharmaceutical Availability</h2>
+        <button onclick="findPharmacies()">Find Pharmacies</button>
+        <div id="pharmacy-list"></div>
+    </section>
+
+    <section id="ambulance">
+        <h2>Nearby Hospitals & Ambulance Availability</h2>
+        <button onclick="findAmbulance()">Check Availability</button>
+        <div id="hospital-list"></div>
+    </section>
+
+    <section id="routing">
+        <h2>Optimal Routing & Navigation</h2>
+        <button onclick="optimizeRoute()">Optimize Route</button>
+        <div id="routing-status"></div>
+    </section>
+
+    <script>
+        function findHospitals() {
+            const location = document.getElementById('search').value;
+            if (location) {
+                alert('Searching for hospitals near ' + location);
+                document.getElementById('map').style.backgroundColor = '#b3e5fc';
+            } else {
+                alert('Please enter a location');
+            }
+        }
+
+        function findDonors() {
+            alert('Fetching available donors in your area...');
+            document.getElementById('donor-list').style.backgroundColor = '#ffccbc';
+        }
+
+        function findPharmacies() {
+            alert('Searching for pharmacies with available medicines...');
+            document.getElementById('pharmacy-list').style.backgroundColor = '#c5e1a5';
+        }
+
+        function findAmbulance() {
+            alert('Checking nearby hospitals and ambulance availability...');
+            document.getElementById('hospital-list').style.backgroundColor = '#b39ddb';
+        }
+
+        function optimizeRoute() {
+            alert('Calculating the best route for ambulance services...');
+            document.getElementById('routing-status').style.backgroundColor = '#ffeb3b';
+        }
+    </script>
+</body>
+
+</html>
