@@ -1,0 +1,28 @@
+// app.js - Entry point for the Node.js backend const express = require('express'); const mongoose = require('mongoose'); const cors = require('cors'); require('dotenv').config(); const app = express(); app.use(express.json()); app.use(cors()); // Connect
+to MongoDB mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('MongoDB Connected')) .catch(err => console.log(err)); // Routes const hospitalRoutes = require('./routes/hospitals'); const
+donorRoutes = require('./routes/donors'); const ambulanceRoutes = require('./routes/ambulances'); app.use('/api/hospitals', hospitalRoutes); app.use('/api/donors', donorRoutes); app.use('/api/ambulances', ambulanceRoutes); // Start server const PORT =
+process.env.PORT || 5000; app.listen(PORT, () => { console.log(`Server running on port ${PORT}`); }); // Frontend - Basic HTML, CSS, JavaScript const path = require('path'); app.use(express.static(path.join(__dirname, 'public'))); // MongoDB Models const
+Hospital = require('./models/Hospital'); const Donor = require('./models/Donor'); const Ambulance = require('./models/Ambulance'); // Frontend Files (HTML, CSS, JS) const fs = require('fs'); if (!fs.existsSync('./public')) { fs.mkdirSync('./public');
+} fs.writeFileSync('./public/index.html', `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Emergency System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Medical Emergency & Ambulance System</h1>
+    <button onclick="findHospitals()">Find Nearby Hospitals</button>
+    <button onclick="findDonors()">Find Blood/Organ Donors</button>
+    <button onclick="checkAmbulance()">Check Ambulance Availability</button>
+    <script src="script.js"></script>
+</body>
+
+</html>
+`); fs.writeFileSync('./public/style.css', ` body { font-family: Arial, sans-serif; text-align: center; padding: 20px; } button { margin: 10px; padding: 10px; font-size: 16px; } `); fs.writeFileSync('./public/script.js', ` function findHospitals() { fetch('/api/hospitals')
+.then(response => response.json()) .then(data => alert(JSON.stringify(data))) .catch(err => console.error(err)); } function findDonors() { fetch('/api/donors') .then(response => response.json()) .then(data => alert(JSON.stringify(data))) .catch(err =>
+console.error(err)); } function checkAmbulance() { fetch('/api/ambulances') .then(response => response.json()) .then(data => alert(JSON.stringify(data))) .catch(err => console.error(err)); } `);
