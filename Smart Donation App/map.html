@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Map – Smart Donation Map</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+  <ul>
+    <li><a href="index.html"> Home</a></li>
+    <li><a href="about.html"> About</a></li>
+    <li><a href="categories.html"> Donations</a></li>
+    <li><a href="volunteer.html"> Volunteer</a></li>
+    <li><a href="map.html"> Map</a></li>
+    <li><a href="how-it-works.html"> How It Works</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="contact.html"> Contact</a></li>
+  </ul>
+</nav>
+
+  <header class="hero">
+    <h1>🗺️ Live Donation Map</h1>
+    <p>See food, clothes, and essentials available near you.</p>
+  </header>
+
+  <section class="content">
+    <div id="map">Loading map...</div>
+  </section>
+
+  <script>
+    function initMap() {
+      const center = { lat: 13.0827, lng: 80.2707 }; // Chennai
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: center,
+      });
+
+      // Example pins
+      new google.maps.Marker({
+        position: { lat: 13.05, lng: 80.25 },
+        map,
+        title: "Food Available – ABC Hostel",
+        icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+      });
+
+      new google.maps.Marker({
+        position: { lat: 13.09, lng: 80.28 },
+        map,
+        title: "Clothes Drop-off – XYZ Center",
+        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      });
+    }
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+  </script>
+</body>
+</html>
